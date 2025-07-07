@@ -1,0 +1,4 @@
+*.ipynb
+/.tf-env
+*.pyc
+__pycache__/main

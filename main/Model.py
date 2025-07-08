@@ -50,8 +50,8 @@ class Model:
         l = len(self.layers)
         for e in range(epoch):
             if (e+1) % 10 == 0:
-                y_hat = self.forward(X[np.newaxis,0,:])
-                print(f"epoch {e+1:>5}  loss = {self.loss(y_hat, y[0])}")
+                y_hat = self.predict(X)
+                print(f"epoch {e+1:>5}  loss = {np.sum(self.loss(y_hat, y))/m}")
 
             dW = None
             dB = None
@@ -68,8 +68,8 @@ class Model:
             for i in range(l):
                 dW[i] = dW[i]/m
                 dB[i] = dB[i]/m
-                self.layers[i].W = self.optimizer.update(self.layers[i].W,dW[i])
-                self.layers[i].B = self.optimizer.update(self.layers[i].B,dB[i])
+                self.layers[i].W = self.optimizer.update(self.layers[i].W,dW[i],i*100)
+                self.layers[i].B = self.optimizer.update(self.layers[i].B,dB[i],i*100+1)
 
             # print(dW)
             # print()
@@ -78,7 +78,7 @@ class Model:
 
     def predict(self,X):
         m = X.shape[0]
-        A = [0]*m
+        A = np.zeros(m)
 
         for i in range(m):
             A[i] = self.forward(X[np.newaxis,i,:])

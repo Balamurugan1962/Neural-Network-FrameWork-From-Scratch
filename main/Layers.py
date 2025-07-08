@@ -1,15 +1,19 @@
 import numpy as np
-
+from main.Activations import Sigmoid,ReLU
+from main.Initializer import XavierUniform,HeUniform
 class Dense:
     def __init__(self,units,activation,in_features):
         self.units = units
         self.in_features = in_features
 
-        #Xavier Initilisation
-        limit = np.sqrt(6 / (in_features + units))
-        self.W = np.random.uniform(-limit, limit, (in_features, units))
-        limit = np.sqrt(6 / (1 + units))
-        self.B = np.random.uniform(-limit, limit, (1, units))
+        if isinstance(activation,Sigmoid):
+            self.init = HeUniform()
+        else:
+            self.init = XavierUniform()
+
+
+        self.W = self.init(in_features,units)
+        self.B = self.init(1,units)
 
         self.g = activation
 

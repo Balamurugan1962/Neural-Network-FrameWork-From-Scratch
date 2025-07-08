@@ -78,7 +78,7 @@ class Model:
 
     def predict(self,X):
         m = X.shape[0]
-        A = [0]*m
+        A = np.zeros(m)
 
         for i in range(m):
             A[i] = self.forward(X[np.newaxis,i,:])

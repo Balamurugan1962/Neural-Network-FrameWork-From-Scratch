@@ -1,4 +1,4 @@
-# Neural-Networks-From-Scratch
+# Neural-Network-Framework-From-Scratch
 Neural Network from scratch is a not just a plain hardcoded neural architecture, it is a general package like TensorFlow and pyTorch where you can create you custom architecture
 
 This package was mainly inspired from the Tensorflow package, so it follows the same flow like we do in Tensorflow

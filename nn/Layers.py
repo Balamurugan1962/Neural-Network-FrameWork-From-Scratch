@@ -1,6 +1,6 @@
 import numpy as np
-from main.Activations import Sigmoid,ReLU
-from main.Initializer import XavierUniform,HeUniform
+from nn.Activations import Sigmoid,ReLU
+from nn.Initializer import XavierUniform,HeUniform
 class Dense:
     def __init__(self,units,activation,in_features):
         self.units = units

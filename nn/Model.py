@@ -1,5 +1,5 @@
 import numpy as np
-from main.Activations import Softmax
+from nn.Activations import Softmax
 class Model:
     def __init__(self,layers):
         self.layers = layers

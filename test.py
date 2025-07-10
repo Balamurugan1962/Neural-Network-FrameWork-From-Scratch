@@ -15,6 +15,7 @@ random_state_test = 99
 X_train, y_train = make_blobs(n_samples=800, centers=centers,cluster_std=cluster_std, random_state=random_state_train)
 
 X_test, y_test = make_blobs(n_samples=200, centers=centers,cluster_std=cluster_std, random_state=random_state_test)
+
 y_train = y_train.reshape(-1, 1)
 y_test = y_test.reshape(-1, 1)
 
@@ -35,7 +36,7 @@ model = Model([
 
 model.compile(loss=BinaryCrossEntropy(),optimizer=StochasticGradientDescent(alpha=0.05))
 
-model.fit(X_train,y_train,epoch=100)
+model.fit(X_train,y_train,epoch=1)
 
 y_pred = model.predict(X_test)
 

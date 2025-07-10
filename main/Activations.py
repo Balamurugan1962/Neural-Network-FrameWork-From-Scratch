@@ -25,13 +25,9 @@ class ReLU:
 class Softmax:
 
     def __call__(self,A):
-        g = A.copy()
-        exps = np.exp(A[0])
-        g[0] = exps/np.sum(exps)
-        return g
+        exps = np.exp(A - np.max(A, axis=1, keepdims=True))
+        return exps / np.sum(exps, axis=1, keepdims=True)
 
     #considered to be used with Categorical Loss function
     def deriv(self,A,y):
-        grad = A.copy()
-        grad[0][y] -=1;
-        return grad
+        return 1

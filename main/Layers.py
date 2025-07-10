@@ -6,6 +6,8 @@ class Dense:
         self.units = units
         self.in_features = in_features
 
+# Tries to assign the initiliser for respective Activation,
+# For now it is done automatically in future need to provide option for user to change
         if isinstance(activation,Sigmoid):
             self.init = HeUniform()
         else:

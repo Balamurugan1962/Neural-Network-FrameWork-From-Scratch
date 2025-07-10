@@ -4,8 +4,6 @@ class Model:
     def __init__(self,layers):
         self.layers = layers
 
-
-
     def compile(self,loss,optimizer):
         self.loss = loss
         self.optimizer = optimizer
@@ -20,7 +18,9 @@ class Model:
         return A_out
 
 
-
+# For now i just made for whole Train Set,
+# and everytime it backtracks for single testcase(Half works with Batch but need to generalise for eveything)
+# In feature need to Implement Batch , Mini Batch Training
     def backward(self,A0,y):
 
         l = len(self.layers)
@@ -29,6 +29,7 @@ class Model:
         A[0] = A0
         for i in range(1,l+1):
             A[i] = self.layers[i-1](A[i-1])
+
         dA = self.loss.deriv(A[l],y)
 
         dW = [0] * l
@@ -44,14 +45,15 @@ class Model:
 
         return dW,dB
 
-
+# Need to Clean code this part
     def fit(self,X,y,epoch=100):
         m = X.shape[0]
         l = len(self.layers)
         for e in range(epoch):
             if (e+1) % 10 == 0:
                 y_hat = self.predict(X)
-                print(f"epoch {e+1:>5}  loss = {np.sum(self.loss(y_hat, y))/m}")
+                avg_loss = np.mean(self.loss(y_hat, y))
+                print(f"Epoch {e + 1:>5}: Loss = {avg_loss:.6f}")
 
             dW = None
             dB = None
@@ -78,9 +80,9 @@ class Model:
 
     def predict(self,X):
         m = X.shape[0]
-        A = np.zeros(m)
+        A = []
 
         for i in range(m):
-            A[i] = self.forward(X[np.newaxis,i,:])
+            A.append(self.forward(X[np.newaxis,i,:]))
 
-        return A
+        return np.vstack(A)

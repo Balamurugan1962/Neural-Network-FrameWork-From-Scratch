@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class GradientDescent:
+class StochasticGradientDescent:
     def __init__(self,alpha=0.001):
         self.alpha = alpha
 
